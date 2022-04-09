@@ -9,6 +9,7 @@ class Postman extends Component{
     state={
         data:{url:"",method:"",postjson:""},
         history:[],
+        bgstyle:""
     }
     senddata=(data)=>{
         let s1={...this.state};
@@ -29,27 +30,27 @@ class Postman extends Component{
         this.setState(s1);
     }
     render(){
-        let {history,data}=this.state;
+        let {history,data,bgstyle}=this.state;
         return(
             <div>
-                <div className="header">
-                    <div className="navbar">
-                        <div className="logodiv"><img className="logo" src="./images/postman.png"></img></div>
+                <div className="headerdiv">
+                    <div className="postmanlogodiv">
+                        <img className="logo" src="./images/postman.png"></img>
+                    </div>
+                    <div className="headeroptionsdiv">
                         <div className="Home"><b>Home</b></div>
                         <div className="Workspaces"><b>Workspaces</b></div>
-                        <div className="Api"><b>API Network</b></div>
+                        <div className="Api"><b>API&nbsp;Network</b></div>
                         <div className="Reports"><b>Reports</b></div>
                         <div className="Explore"><b>Explore</b></div>
-                        <div className="space"></div>
-                        <div className="search">
-                            <div className="searchicon">
-                                <AiOutlineSearch />
-                            </div>
-                            <input required className="form-control" type="text" placeholder="     Search Postman">
+                    </div>
+                    <div className="divdiv" style={{width:"100%"}}></div>
+                    <div className="headersearchdiv">
+                        <input className="form-control" type="text" placeholder="     Search Postman">
                             </input>
                     </div>
-                    <div className="cloudicon">
-                        
+                    <div className="divdiv" style={{width:"100%"}}>
+
                     </div>
                     <div className="invite">
                         <button className=" btn btn-sm btn-primary">
@@ -59,14 +60,15 @@ class Postman extends Component{
                         <div><FaRegSun/></div>
                         <div><AiOutlineBell/></div>
                     </div>
-                    <div >
+                    <div className="">
                         <button className="upgrade btn btn-sm ">Upgrade</button>
                     </div>
-                    </div>
                 </div>
+
+                
                 <div className="data">
                     <div className="left">
-                        <Postmanleft history={history} onSend={this.handlehistoryclick}/>
+                        <Postmanleft history={history} onSend={this.handlehistoryclick} bgstyle={bgstyle}/>
                     </div>
                     <div className="right">
                         <Postmanright onSend={this.senddata} ChangeData={this.changedata} data={data}/>

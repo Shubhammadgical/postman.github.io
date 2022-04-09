@@ -6,17 +6,21 @@ import { GrHistory } from "react-icons/gr";
 import { FiBox ,FiMonitor} from "react-icons/fi";
 import { HiOutlineInbox} from "react-icons/hi";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import './Whatsapp.css';
+import './Postman.css';
 class Postmanleft extends Component{
     state={
         history:this.props.history,
+        colorindex:-1,
+        bgstyle:this.props.bgstyle
     }
     handlehistoryclick(index){
         let s1={...this.state};
+        s1.colorindex=index;
         this.props.onSend(s1.history[index]);
+        this.setState(s1)
     }
     render(){
-        let {history}=this.state;
+        let {history,colorindex}=this.state;
         return(
             <div>
                 <div className="myworkspace">
@@ -56,17 +60,25 @@ class Postmanleft extends Component{
                             <div className="leftpannel ">
                                 <div className="leftscroller p-2">
                                     {history.map((d,index)=>(
-                                    <div className="row">
-                                        <div onClick={()=>this.handlehistoryclick(index)}>
+                                        colorindex===index ?
+                                        <div className="row">
+                                        <div className="historydiv"  style={{color:"blue"}} onClick={()=>this.handlehistoryclick(index)}>
+                                            <span style={{color:"blue"}}>{d.method}</span> &nbsp;{d.url}
+                                        </div>
+                                        </div> 
+                                        :
+                                        <div className="row">
+                                        <div className="historydiv" onClick={()=>this.handlehistoryclick(index)}>
                                             <span className="method">{d.method}</span> &nbsp;{d.url}
                                         </div>
-                                    </div>
+                                        </div>
+                                        
+
                                     ))}
                                 </div>
                             </div>
                         </div>
                 </div>
-            
             </div>
         )
     }

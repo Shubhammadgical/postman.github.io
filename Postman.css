@@ -1,3 +1,54 @@
+*{
+    padding: 0;
+    margin: 0;
+  }
+.headerdiv{
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+.headeroptionsdiv{
+    display: inline-flex;
+    width: 425px;
+    color: rgb(145, 132, 132);
+}
+.postmanlogodiv{
+    margin-left: 5px;
+}
+.headeroptionsdiv div{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.headersearchdiv{
+    margin-right: 50px;
+    margin-left: 50px;
+    width: 500px;
+    min-width: 300px;
+    max-width: 500px;
+    margin: 5px;
+}
+.invite button{
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+}
+.logo{
+    width: 32px;
+    height: 32px;
+}
+.upgrade{
+    background-color: rgb(240, 238, 238);
+    margin-right: 5px;
+}
+.icons{
+    display: inline-flex;
+    width: 100px;
+}
+.icons div{
+    width: 40px;
+    color: #aaa;
+}
 .form-control:focus {
     color: #212529;
     background-color:none;
@@ -16,8 +67,34 @@
     outline: 0;
     box-shadow: 0 0 0 0 ;
 }
+.data{
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+}
+.left{
+    width:370px;
+    height:100%;
+}
+.right{
+    width: 100%;
+    height: 100%;
+}
+.fullrightpannel{
+    display: inline-flex;
+    width: 100%;
+}
+.rightpannel{
+    width: 100%;
+}
+.penmsgdiv{
+    display: inline-flex;
+}
+
+
+
 .urltext{
-    width: 80%;
+    width: 10%;
 }
 .method{
     color: orange;
@@ -29,28 +106,43 @@
     display: block;
     flex: 1;
     width: 100%;
+    min-height: 165px;
     height:100%;
     font-size: 15px;
     padding: 10px;
 }
 .responsedata{
-    height: 320px;
+    height: 100%;
     border: 1px solid gray;
     margin: 10px;
     background-attachment: fixed;
     overflow-y: scroll;
     flex: 1;
 }
-.body{
+.rightscroller{
     background-attachment: fixed;
-    overflow-y: scroll;
+    overflow-x: scroll;
+    overflow-y:visible;
     flex: 1;
 }
-
-*{
-  padding: 0;
-  margin: 0;
+.body ::-webkit-scrollbar{
+    width: 5px;
 }
+/* side me scroller ka bg color*/
+.body ::-webkit-scrollbar-track{
+    background: #e9e4e4;
+}
+/*scroller ka color*/
+.body ::-webkit-scrollbar-thumb{
+    background: #aaa;
+}
+.body{
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+}
+
+
 .leftscroller{
     background-attachment: fixed;
     overflow-y: scroll;
@@ -75,52 +167,13 @@
     display: flex;
     flex-direction: column;
 }
-.rightpannel{
-    width: 100%;
-}
+
 .row{
     --bs-gutter-x: 0;
     margin: 0px;
 }
-.header{
-    border: 1px solid lightgray;
-    width: 1518px;
-}
-.navbar{
-    color: rgb(145, 132, 132);
-    width: 1515px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-.logo{
-    width: 32px;
-    height: 32px;
-}
-.logodiv{
-    width: 20px;
-}
-.space{
-    width: 100px;
-}
-.search{
-    padding: 5px;
-    width: 400px;
-}
-.upgrade{
-    background-color: rgb(240, 238, 238);
-}
-.cloudicon{
-    width: 200px;
-}
-.icons{
-    display: inline-flex;
-    width: 100px;
-}
-.icons div{
-    width: 40px;
-}
+
+
 .myworkspace{
     font-size: 15px;
     padding: 5px;
@@ -128,7 +181,6 @@
     height: 40px;
     width: 370px;
     border-bottom: 1px solid lightgray;
-
     align-items: center;
 }
 .myworkspace button{
@@ -150,23 +202,16 @@
     width: 100px;
 }
 
-.data{
-    display: inline-flex;
-}
-.left{
-    width:370px
-}
-.right{
-    width: 1100px;
-}
+
 
 .leftleft{
     display: inline-flex;
     background-color: rgb(248, 246, 246);
-    height: 660px;
+    height: 100%;
 }
 .leftoptions{
     width: 90px;
+    height: 100%;
     border:1px solid lightgray;
     font-size: 11px;
     text-align: center;
@@ -182,25 +227,21 @@
     display: inline-flex;
     border: 1px solid lightgray;
     padding: 10px;
-    width: 1090px;
+    width: 100%;
 }
 .showurl{
     padding-top: 4px;
-    width: 900px;
+    width: 85%;
     font-size: 15px;
 }
 .urlsavebtndiv button{
     margin: 2px;
     background-color: rgb(240, 238, 238);
 }
-.fullrightpannel{
-    display: inline-flex;
-}
 .rightoptions{
     border:1px solid lightgray;
     width: 58px;
     text-align: center;
-    margin-bottom: 9px;
 }
 .rightoptions div{
     padding: 10px;
@@ -225,226 +266,14 @@
     padding-top: 3px;
     padding-left: 7px;
 }
-
-@media only screen and (max-width: 1000px) {
-    .historypannel{
-      display: none;
-    }
-    .myworkspace{
-        display: none;
-    }
-    .historypannel{
-        width: 0px;
-    }
-    .left{
-        width: 90px;
-    }
-    .header{
-        width: 983px;
-    }
-    .space{
-        width: 0px;
-    }
-    .cloudicon{
-        width: 0px;
-    }
-    .navbar{
-        width: 970px;
-    }
-    .search{
-        width: 200px;
-    }
-    .rightpannel{
-        width: 835px;
-    }
-    .urlsavebtndiv{
-        width: 893px;
-    }
-    .showurl{
-        width: 650px;
-    }
-    .right{
-        width:892px
-    }
-  }
-
-
-
-/*import React, {Component} from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Whatsapp.css';
-import http from "./http";
-import JSONPretty from "react-json-pretty";
-class Postmanright extends Component{
-    state={
-        data:{url:"",method:"",postjson:""},
-        options:["GET","POST"],
-        alldata:[],
-        
-    }
-    handlechange=(e)=>{
-       let s1={...this.state};
-       s1.data[e.currentTarget.name] = e.currentTarget.value;
-       this.setState(s1);
-    }
-    async fetchdata(){
-        let s1={...this.state}
-        let response=await http.get(`${s1.data.url}`);
-        console.log(response)
-        this.setState({alldata:response.data})
-    }
-    handlesendbtn=()=>{
-        let s1={...this.state};
-        this.setState(s1);
-        console.log(s1.data)
-        if(s1.data.method==""){
-            s1.data.method="GET"
-        }
-        this.props.onSend(s1.data);
-        this.fetchdata();
-    }
-    render(){
-        let {url,method,postjson}=this.state.data;
-        let {alldata}=this.state;
-        let status="";
-        if(alldata.length>0){
-            status="200 OK"
-            console.log(alldata)
-        }
-        return(
-            <div className="rightpannel">
-                <div className="input-group p-2">
-                        <select className="form-select flex-grow-0 w-auto" name="method" value={method}
-                            onChange={this.handlechange}>
-                            <option value="GET" selected>GET</option>
-                            <option value="POST" selected>POST</option>
-                        </select>
-                        <input required className="form-control" id="url"
-                        name="url"
-                        value={url} onChange={this.handlechange} type="url" placeholder="https://localhost:3000/example"></input>
-                        <button className="btn btn-primary" onClick={()=>this.handlesendbtn()}>Send</button>
-                    </div>
-                <div>
-
-                    <div className="bodydata">
-                    <ul className="nav nav-tabs" role="tablist">
-                        <li className="nav-item" role="presentation">
-                            <button className="nav-link active" id="query-params-tab"
-                                data-bs-toggle="tab" data-bs-target="#query-params" type="button"
-                                role="tab" aria-controls="query-params" aria-selected="true">Query Params</button>
-                        </li>
-                        <li className="nav-item" role="presentation">
-                            <button className="nav-link" id="request-headers-tab"
-                                data-bs-toggle="tab" data-bs-target="#request-headers" type="button"
-                                role="tab" aria-controls="request-headers" aria-selected="false">Headers</button>
-                        </li>
-                        <li className="nav-item" role="presentation">
-                            <button className="nav-link" id="json-tab"
-                                data-bs-toggle="tab" data-bs-target="#json" type="button"
-                                role="tab" aria-controls="json" aria-selected="false">JSON</button>
-                        </li>
-                    </ul>
-
-                    <div className="tab-content p-3 border-top-0 border">
-                        <div className="tab-pane fade show active" id="query-params"
-                            role="tabpanel" aria-labelledby="query-params-tab">
-                                <div data-query-params style={{height:185}}>
-                                <button data-add-query-param-btn className="mt-2 btn btn-outline-success"
-                                    type="button">Add</button>
-                                </div> 
-                        </div>
-                        <div className="tab-pane fade " id="request-headers"
-                            role="tabpanel" aria-labelledby="request-headers-tab">
-                                <div data-request-headers style={{height:185}}>
-                                <button data-add-request-headers-btn className="mt-2 btn btn-outline-success"
-                                    type="button" >Add2</button>
-                                </div> 
-                        </div>
-                        <div className="tab-pane fade " id="json"
-                            role="tabpanel" aria-labelledby="json-tab">
-                                <div data-json-request-body className="overflow-auto"
-                                    style={{height:185}}>
-                                <textarea className="bg-light border border-1 rounded p-3" 
-                                    name="postjson" value={postjson} onChange={this.handlechange}>
-                                </textarea>
-                                </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="responsebody p-2">
-                    <h3>Response</h3>
-                    <div className="d-flex my-2">
-                        <div className="me-3">
-                            Status: <span data-status>{status}</span>
-                        </div>
-                        <div className="me-3">
-                            Time: <span data-time></span>
-                        </div>
-                        <div className="me-3">
-                            Size: <span data-size></span>
-                        </div>
-                    </div>
-                    <ul className="nav nav-tabs" role="tablist">
-                        <li className="nav-item" role="presentation"  style={{listStyleType:"circle"}}>
-                            <button className="nav-link active" id="body-tab"
-                                data-bs-toggle="tab" data-bs-target="#body" type="button"
-                                role="tab" aria-controls="body" aria-selected="true">Body</button>
-                        </li>
-                        <li className="nav-item" role="presentation">
-                            <button className="nav-link" id="response-headers-tab"
-                                data-bs-toggle="tab" data-bs-target="#response-headers" type="button"
-                                role="tab" aria-controls="response-headers" aria-selected="false">Headers</button>
-                        </li>
-                    </ul>
-                    <div className="tab-content p-3 border-top-0 border" >
-                        <div className="tab-pane fade show active" id="body"
-                            role="tabpanel" aria-labelledby="body-tab"  style={{listStyleType:"circle"}}>
-                                <div className="overflow-auto"
-                                    style={{height:200,listStyleType:"circle"}}>
-                                        {alldata.length>0?  
-                                         <div  style={{listStyleType:"circle"}}>
-                                             <JSONPretty data={alldata} />
-                                         </div>
-                                         :"Empty Error"}
-                                    </div>
-                        </div>
-
-
-                        
-                        <div className="tab-pane fade " id="response-headers"
-                            role="tabpanel" aria-labelledby="response-headers-tab">
-                            <div className="overflow-auto"
-                                    style={{height:200}}>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                
-            </div>
-        )
-    }
+.historydiv{
+    display: inline-flex;
 }
-export default Postmanright;
-
-
-
-
-
-
-
-
-
-
-
-
-{method==="GET"?
-                                            alldata.length>0?  
-                                            <div>
-                                             <JSONPretty data={alldata} />
-                                            </div>
-                                            :""  : <div><JSONPretty data={alldata} /></div>}
-
-*/
+@media only screen and (max-width: 1261px) {
+    .headerdiv{
+      width: 1250px;
+    }
+    .data{
+        width: 1250px;
+      }
+}

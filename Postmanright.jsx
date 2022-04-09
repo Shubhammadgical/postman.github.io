@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Whatsapp.css';
+import './Postman.css';
 import http from "./http";
 import JSONPretty from "react-json-pretty";
 import { HiOutlineLightBulb } from "react-icons/hi";
@@ -11,6 +11,7 @@ class Postmanright extends Component{
     state={
         data:this.props.data,
         alldata:[],
+        headers:"",
         status:"",
         statustext:""
     }
@@ -22,8 +23,17 @@ class Postmanright extends Component{
     }
     async fetchdata(){
         let s1={...this.state}
-        let response;
-        if(s1.data.method==="GET"){
+        let AllData;
+        if(s1.data.postjson!=""){
+            let post=JSON.parse(s1.data.postjson);
+            AllData={url:s1.data.url,method:s1.data.method,json:post};
+        }else{
+            AllData={url:s1.data.url,method:s1.data.method};
+        }
+            let response = await http.post("/newdata",AllData);
+            console.log(response);
+            s1.alldata=response.data;
+        /*if(s1.data.method==="GET"){
             try{
                 response=await http.get(`${s1.data.url}`);
                 console.log(response.data)
@@ -47,8 +57,9 @@ class Postmanright extends Component{
                 s1.status="";
                 s1.statustext="";
             }
-        }
+        }*/
         this.setState(s1)
+        
     }
     handlesendbtn=()=>{
         let s1={...this.state};
@@ -69,6 +80,7 @@ class Postmanright extends Component{
                     <div className="showurl">
                         <b>{url}</b>
                     </div>
+                    <div className="divdiv" style={{width:"100%"}}></div>
                     <div>
                         <button className="btn btn-sm ">Save</button>
                     </div>
@@ -76,8 +88,8 @@ class Postmanright extends Component{
                         <button className="btn btn-sm ">/</button>
                     </div> 
                     <div style={{width:1,backgroundColor:"lightgray",marginLeft:5,marginRight:5}}></div>
-                    <div className="">
-                        <button className="btn btn-sm "><BiPencil className="lefticons"/><BiMessageDetail className="lefticons"/></button>
+                    <div className="penmsgdiv">
+                        <button className="btn btn-sm "><BiMessageDetail className="lefticons"/></button>
                     </div>
                 </div>
                 <div className="input-group p-2">
@@ -112,13 +124,17 @@ class Postmanright extends Component{
                                 data-bs-toggle="tab" data-bs-target="#json" type="button"
                                 role="tab" aria-controls="json" aria-selected="false">JSON</button>
                         </li>
-                        <li><span style={{paddingLeft:"710px",fontSize:"14px",color:"blue"}}><b>Cookies</b></span></li>
                     </ul>
 
                     <div className="tab-content p-3 border-top-0 border">
                         <div className="tab-pane fade show active" id="query-params"
                             role="tabpanel" aria-labelledby="query-params-tab">
                                 <div data-query-params style={{height:165}}>
+                                    <div className="input-group">
+                                    <input className="form-control" type="text" placeholder="Key"></input>
+                                    <input className="form-control" type="text" placeholder="Value"></input>
+                                    <button type="button" className="btn btn-outline-danger">Remove</button>
+                                    </div>
                                 <button data-add-query-param-btn className="mt-2 btn btn-outline-success"
                                     type="button">Add</button>
                                 </div> 
@@ -126,14 +142,18 @@ class Postmanright extends Component{
                         <div className="tab-pane fade " id="request-headers"
                             role="tabpanel" aria-labelledby="request-headers-tab">
                                 <div data-request-headers style={{height:165}}>
+                                <div className="input-group">
+                                    <input className="form-control" type="text" placeholder="Key"></input>
+                                    <input className="form-control" type="text" placeholder="Value"></input>
+                                    <button type="button" className="btn btn-outline-danger">Remove</button>
+                                    </div>
                                 <button data-add-request-headers-btn className="mt-2 btn btn-outline-success"
-                                    type="button" >Add2</button>
+                                    type="button" >Add</button>
                                 </div> 
                         </div>
                         <div className="tab-pane " id="json"
                             role="tabpanel" aria-labelledby="json-tab">
-                                <div data-json-request-body className="overflow-auto"
-                                    style={{height:165}}>
+                                <div style={{height:165}}>
                                 <textarea name="postjson" value={postjson} onChange={this.handlechange}>
                                 </textarea>
                                 </div>
@@ -142,11 +162,9 @@ class Postmanright extends Component{
                     </div>
                 </div>
                 <div className="row">
-                    <div className="responsebody p-2">
-                    <div  style={{display:"inline-flex",width:"800px"}}><h3>Response</h3> 
-                    <div  style={{position:"absolute",paddingLeft:"650px" ,display:"inline-flex"}}>
-                        <div style={{width:"200px",color:"green",fontSize:"14px"}}>Status: {status} {statustext}</div>
-                    </div>
+                    <div className="responsebody px-2">
+                    <div ><h3>Response</h3> 
+                    
                     </div>
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="nav-item" role="presentation">
@@ -163,10 +181,12 @@ class Postmanright extends Component{
                     <div className="tab-content p-3 border-top-0 border">
                         <div className="tab-pane fade show active" id="body"
                             role="tabpanel" aria-labelledby="body-tab">
-                                <div className="overflow-auto"
-                                    style={{height:200}}>
+                                <div className="body">
+                                    <div className="rightscroller"
+                                    style={{height:180,width:1000}}>
                                         <JSONPretty data={alldata} />
                                     </div>
+                                </div>
                         </div>
                         <div className="tab-pane fade " id="response-headers"
                             role="tabpanel" aria-labelledby="response-headers-tab">

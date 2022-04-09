@@ -1,5 +1,5 @@
-
 let express=require("express");
+const { getEnvironmentData } = require("worker_threads");
 let app = express();
 app.use(express.json());
 app.use(function(req,res,next){
@@ -14,10 +14,12 @@ app.use(function(req,res,next){
     );
         next();
 });
-var port = process.env.PORT || 2410;
+
+const port = 2410;
 app.listen(port, ()=> console.log(`Node app listening on port ${port}!`));
 
 let {questions}=require("./data.js");
+let axios = require("axios");
 
 app.get("/alldata",function(req,res){
     res.send(questions)
@@ -36,13 +38,39 @@ app.post("/alldata",function(req,res){
     }
 })
 
-let newdata={url:"",method:"",body:""};
-
-app.post("/newdata",function(req,res){
+app.post("/newdata",async function(req,res){
     let body=req.body;
-    newdata.url=body.url;
-    newdata.method=body.method;
-    newdata.body=body.json;
-    console.log(newdata)
-    console.log("hello")
+    console.log(body);
+    let newdata={url:body.url,method:body.method,json:body.json};
+    if(newdata.method==="GET"){
+      await axios.get(`${newdata.url}`)
+        .then(function(response){
+            console.log(response);
+            res.send(response.data);
+        })
+        .catch(function(error){
+            if(error.response){
+                let {status,statusText}=error.response;
+                console.log(status,statusText);
+                res.send(error.message)
+            }else{
+                res.send(error.code);
+            }
+        })
+    }else if(newdata.method==="POST"){
+        await axios.post(`${newdata.url}`,newdata.json)
+            .then(function(){
+                res.send(newdata.json);
+            })
+            .catch(function(error){
+                if(error.response){
+                    let {status,statusText}=error.response;
+                    console.log(status,statusText);
+                    res.send(error.message)
+                }else{
+                    res.send(error.code);
+                }
+            })
+    }
 })
+

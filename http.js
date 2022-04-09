@@ -3,11 +3,11 @@ import axios from "axios";
 const baseURL = "http://localhost:2410";
 
 function get( url){
-    return axios.get(url);
+    return axios.get( url);
 }
 
 function post(url,obj){
-    return axios.post(url, obj);
+    return axios.post(baseURL + url, obj);
 }
 
 function putApi(url,obj){
