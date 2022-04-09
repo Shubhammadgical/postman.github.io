@@ -22,8 +22,18 @@ let {questions}=require("./data.js");
 let axios = require("axios");
 
 app.get("/alldata",function(req,res){
-    res.send(questions)
-    console.log(questions)
+    try{
+        res.send(questions)
+        console.log(questions)
+    }catch(error){
+        if(error.response){
+            console.log(error.response);
+            res.send(error)
+        }else{
+            res.send(error);
+            console.log(error)
+        }
+    }
 })
 
 app.post("/alldata",function(req,res){
@@ -51,10 +61,11 @@ app.post("/newdata",async function(req,res){
         .catch(function(error){
             if(error.response){
                 let {status,statusText}=error.response;
-                console.log(status,statusText);
-                res.send(error.message)
+                console.log(error.response);
+                res.send(error)
             }else{
-                res.send(error.code);
+                res.send(error);
+                console.log(error)
             }
         })
     }else if(newdata.method==="POST"){
@@ -66,9 +77,9 @@ app.post("/newdata",async function(req,res){
                 if(error.response){
                     let {status,statusText}=error.response;
                     console.log(status,statusText);
-                    res.send(error.message)
+                    res.send(error)
                 }else{
-                    res.send(error.code);
+                    res.send(error);
                 }
             })
     }

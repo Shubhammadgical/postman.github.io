@@ -6,14 +6,7 @@ class Newpostman extends Component{
         return(
             <div className="p-4">
                 <form>
-                    <div className="input-group mb-4">
-                        <select className="form-select flex-grow-0 w-auto">
-                            <option value="GET" selected>GET</option>
-                            <option value="POST" selected>POST</option>
-                        </select>
-                        <input required className="form-control" type="url" placeholder="https://localhost:3000/example"></input>
-                        <button className="btn btn-primary">Send</button>
-                    </div>
+                    
 
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="nav-item" role="presentation">
@@ -55,18 +48,6 @@ class Newpostman extends Component{
                 </form>
 
                 <div className="mt-5" data-response-section>
-                    <h3>Response</h3>
-                    <div className="d-flex my-2">
-                        <div className="me-3">
-                            Status: <span data-status></span>
-                        </div>
-                        <div className="me-3">
-                            Time: <span data-time></span>
-                        </div>
-                        <div className="me-3">
-                            Size: <span data-size></span>
-                        </div>
-                    </div>
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="nav-item" role="presentation">
                             <button className="nav-link active" id="body-tab"
@@ -83,8 +64,7 @@ class Newpostman extends Component{
                     <div className="tab-content p-3 border-top-0 border">
                         <div className="tab-pane fade show active" id="body"
                             role="tabpanel" aria-labelledby="body-tab">
-                                <div data-json-response-body className="overflow-auto"
-                                    style="max-height:200px;"></div>
+                                
                         </div>
                         <div className="tab-pane fade " id="response-headers"
                             role="tabpanel" aria-labelledby="response-headers-tab">

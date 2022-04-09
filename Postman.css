@@ -121,25 +121,33 @@
 }
 .rightscroller{
     background-attachment: fixed;
-    overflow-x: scroll;
-    overflow-y:visible;
+    overflow-y: scroll;
     flex: 1;
 }
-.body ::-webkit-scrollbar{
+.rightscrollerbody ::-webkit-scrollbar{
     width: 5px;
 }
 /* side me scroller ka bg color*/
-.body ::-webkit-scrollbar-track{
-    background: #e9e4e4;
+.rightscrollerbody ::-webkit-scrollbar-track{
+    background: "";
 }
 /*scroller ka color*/
-.body ::-webkit-scrollbar-thumb{
+.rightscrollerbody ::-webkit-scrollbar-thumb{
     background: #aaa;
 }
-.body{
-    height: 180px;
+.rightscrollerbody{
+    height: 200px;
+    /*width: 1057px;*/
     display: flex;
     flex-direction: column;
+}
+.__json-pretty-error__{
+    height: 250px;
+    width: 1050px;
+}
+.__json-pretty__{
+    height: 184px;
+    width: 1050px;
 }
 
 

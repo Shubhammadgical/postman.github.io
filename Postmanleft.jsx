@@ -11,11 +11,13 @@ class Postmanleft extends Component{
     state={
         history:this.props.history,
         colorindex:-1,
-        bgstyle:this.props.bgstyle
+        bgstyle:this.props.bgstyle,
+        highlight:this.props.highlight,
     }
     handlehistoryclick(index){
         let s1={...this.state};
         s1.colorindex=index;
+        s1.highlight="false";
         this.props.onSend(s1.history[index]);
         this.setState(s1)
     }
@@ -62,18 +64,16 @@ class Postmanleft extends Component{
                                     {history.map((d,index)=>(
                                         colorindex===index ?
                                         <div className="row">
-                                        <div className="historydiv"  style={{color:"blue"}} onClick={()=>this.handlehistoryclick(index)}>
-                                            <span style={{color:"blue"}}>{d.method}</span> &nbsp;{d.url}
+                                        <div className="historydiv px-2"  style={{backgroundColor:"lightgray",borderRadius:"10px"}} onClick={()=>this.handlehistoryclick(index)}>
+                                            <span style={{color:"blue"}}>{d.method}</span> &nbsp;{d.url.length>28 ? d.url.substring(0,28)+"...":d.url}
                                         </div>
                                         </div> 
                                         :
                                         <div className="row">
-                                        <div className="historydiv" onClick={()=>this.handlehistoryclick(index)}>
-                                            <span className="method">{d.method}</span> &nbsp;{d.url}
+                                        <div className="historydiv px-2" onClick={()=>this.handlehistoryclick(index)}>
+                                            <span className="method">{d.method}</span> &nbsp;{d.url.length>28 ? d.url.substring(0,28)+"...":d.url}
                                         </div>
                                         </div>
-                                        
-
                                     ))}
                                 </div>
                             </div>

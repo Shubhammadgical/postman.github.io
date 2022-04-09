@@ -13,26 +13,56 @@ class Postmanright extends Component{
         alldata:[],
         headers:"",
         status:"",
-        statustext:""
+        statustext:"",
+        highlight:this.props.highlight,
     }
     handlechange=(e)=>{
        let s1={...this.state};
        s1.data[e.currentTarget.name] = e.currentTarget.value;
+       s1.highlight="true";
        this.setState(s1);
        this.props.ChangeData(this.state.data)
     }
+    
     async fetchdata(){
         let s1={...this.state}
         let AllData;
-        if(s1.data.postjson!=""){
-            let post=JSON.parse(s1.data.postjson);
-            AllData={url:s1.data.url,method:s1.data.method,json:post};
+        
+        if(s1.data.method==="POST"){
+            try{
+                let post=JSON.parse(s1.data.postjson);
+                AllData={url:s1.data.url,method:s1.data.method,json:post};
+                console.log("true");
+                let response = await http.post("/newdata",AllData);
+                console.log(response);
+                s1.alldata=response.data;
+                s1.headers=response.headers;
+                if(response.data.status){
+                    s1.status=response.data.status;
+                }else if(response.status){
+                    s1.status=response.status;
+                }else{
+                    s1.status="NOT FOUND"
+                }
+            }catch(e){
+                s1.alldata="Please check the JSON format that you want to POST";
+                s1.status="";
+            }
         }else{
             AllData={url:s1.data.url,method:s1.data.method};
-        }
             let response = await http.post("/newdata",AllData);
             console.log(response);
             s1.alldata=response.data;
+            s1.headers=response.headers;
+            if(response.data.status){
+                s1.status=response.data.status;
+            }else if(response.status){
+                s1.status=response.status;
+            }else{
+                s1.status="NOT FOUND"
+            }
+        }
+        this.setState(s1)
         /*if(s1.data.method==="GET"){
             try{
                 response=await http.get(`${s1.data.url}`);
@@ -58,7 +88,6 @@ class Postmanright extends Component{
                 s1.statustext="";
             }
         }*/
-        this.setState(s1)
         
     }
     handlesendbtn=()=>{
@@ -72,13 +101,14 @@ class Postmanright extends Component{
     }
     render(){
         let {url,method,postjson}=this.state.data;
-        let {alldata,status,statustext}=this.state;
+        let {alldata,status,statustext,headers}=this.state;
+        
         return(
             <div className="fullrightpannel">
             <div className="rightpannel">
                 <div className="urlsavebtndiv">
                     <div className="showurl">
-                        <b>{url}</b>
+                        <b>{url.length>50 ? url.substring(0,50)+"...":url}</b>
                     </div>
                     <div className="divdiv" style={{width:"100%"}}></div>
                     <div>
@@ -163,8 +193,9 @@ class Postmanright extends Component{
                 </div>
                 <div className="row">
                     <div className="responsebody px-2">
-                    <div ><h3>Response</h3> 
-                    
+                    <div className="row">
+                        <div className="col-6"><h3>Response</h3></div> 
+                        <div className="col-6" style={{marginTop:20}}>Status : {status}</div>
                     </div>
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="nav-item" role="presentation">
@@ -181,9 +212,8 @@ class Postmanright extends Component{
                     <div className="tab-content p-3 border-top-0 border">
                         <div className="tab-pane fade show active" id="body"
                             role="tabpanel" aria-labelledby="body-tab">
-                                <div className="body">
-                                    <div className="rightscroller"
-                                    style={{height:180,width:1000}}>
+                                <div className="rightscrollerbody">
+                                    <div className="rightscroller">
                                         <JSONPretty data={alldata} />
                                     </div>
                                 </div>
@@ -192,6 +222,25 @@ class Postmanright extends Component{
                             role="tabpanel" aria-labelledby="response-headers-tab">
                             <div className="overflow-auto"
                                     style={{height:200}}>
+                                        {headers? <div>
+                                        <div className="row ">
+                                            <div className="col-6 border p-2" >
+                                                Content-Length 
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['content-length']}
+                                            </div>
+                                        </div>
+                                        <div className="row ">
+                                            <div className="col-6 border p-2">
+                                                Content-type
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['content-type']}
+                                            </div>
+                                        </div></div>
+                                        : ""}
+                                        
                             </div>
                         </div>
                     </div>
