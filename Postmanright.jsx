@@ -14,20 +14,16 @@ class Postmanright extends Component{
         headers:"",
         status:"",
         statustext:"",
-        highlight:this.props.highlight,
     }
     handlechange=(e)=>{
        let s1={...this.state};
        s1.data[e.currentTarget.name] = e.currentTarget.value;
-       s1.highlight="true";
        this.setState(s1);
-       this.props.ChangeData(this.state.data)
+       this.props.ChangeData(this.state.data);
     }
-    
     async fetchdata(){
         let s1={...this.state}
         let AllData;
-        
         if(s1.data.method==="POST"){
             try{
                 let post=JSON.parse(s1.data.postjson);
@@ -101,8 +97,7 @@ class Postmanright extends Component{
     }
     render(){
         let {url,method,postjson}=this.state.data;
-        let {alldata,status,statustext,headers}=this.state;
-        
+        let {alldata,status,headers}=this.state;
         return(
             <div className="fullrightpannel">
             <div className="rightpannel">

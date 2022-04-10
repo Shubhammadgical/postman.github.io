@@ -106,8 +106,8 @@
     display: block;
     flex: 1;
     width: 100%;
-    min-height: 165px;
-    height:100%;
+    min-height:165px;
+    max-height: 165px;
     font-size: 15px;
     padding: 10px;
 }

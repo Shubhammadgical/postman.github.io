@@ -10,12 +10,13 @@ class Postman extends Component{
         data:{url:"",method:"",postjson:""},
         history:[],
         bgstyle:"",
-        highlight:"true",
+        highlight:"",
     }
     senddata=(data)=>{
         let s1={...this.state};
         let data1={url:data.url,method:data.method};
-        s1.highlight="false";
+        s1.highlight="true";
+        console.log(s1.highlight)
         s1.history.push(data1);
         this.setState(s1);
     }
@@ -24,17 +25,17 @@ class Postman extends Component{
         s1.data.url=data.url;
         s1.data.method=data.method;
         s1.postjson=data.postjson;
+        s1.highlight="false";
+        console.log(s1.highlight)
         this.setState(s1);
     }
     changedata=(newdata)=>{
         let s1={...this.state};
         s1.data.url=newdata.url;
-        s1.highlight=newdata.highlight;
         this.setState(s1);
     }
     render(){
         let {history,data,bgstyle,highlight}=this.state;
-        console.log(highlight);
         return(
             <div>
                 <div className="headerdiv">
